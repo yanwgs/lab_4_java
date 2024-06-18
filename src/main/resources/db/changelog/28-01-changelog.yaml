@@ -1,0 +1,163 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1716907261147-1
+      author: Serfetto (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: joke_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1716907261147-2
+      author: Serfetto (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: user_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1716907261147-3
+      author: Serfetto (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: user_role_id_seq
+            startValue: 1
+  - changeSet:
+      id: 1716907261147-4
+      author: Serfetto (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_jokes
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: text
+                  type: VARCHAR(255)
+              - column:
+                  name: likes
+                  type: INT
+              - column:
+                  name: created
+                  type: DATETIME
+              - column:
+                  name: updated
+                  type: DATETIME
+            tableName: jokes
+  - changeSet:
+      id: 1716907261147-5
+      author: Serfetto (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_jokes_history
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: jokes_id
+                  type: BIGINT
+              - column:
+                  name: text
+                  type: VARCHAR(255)
+              - column:
+                  name: created
+                  type: DATETIME
+              - column:
+                  name: updated
+                  type: DATETIME
+            tableName: jokes_history
+  - changeSet:
+      id: 1716907261147-6
+      author: Serfetto (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_user_roles
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: user_authority
+                  type: SMALLINT
+              - column:
+                  name: user_id
+                  type: BIGINT
+            tableName: user_roles
+  - changeSet:
+      id: 1716907261147-7
+      author: Serfetto (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_users
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: expired
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: locked
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: enabled
+                  type: BOOLEAN
+            tableName: users
+  - changeSet:
+      id: 1716907261147-8
+      author: Serfetto (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: jokes_id
+            baseTableName: jokes_history
+            constraintName: FK_JOKES_HISTORY_ON_JOKES
+            referencedColumnNames: id
+            referencedTableName: jokes
+  - changeSet:
+      id: 1716907261147-9
+      author: Serfetto (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_roles
+            constraintName: FK_USER_ROLES_ON_USER
+            referencedColumnNames: id
+            referencedTableName: users
+
